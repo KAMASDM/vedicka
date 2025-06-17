@@ -1,3 +1,41 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "Disclaimer | Vedicka – Content Responsibility & Guidance",
+  description:
+    "Review Vedicka's Disclaimer to understand the scope and intent of our content. Learn how to interpret wellness guidance, expert insights, and personal stories shared on our platform.",
+  openGraph: {
+    title: "Disclaimer | Vedicka – Content Responsibility & Guidance",
+    description:
+      "Review Vedicka's Disclaimer to understand the scope and intent of our content. Learn how to interpret wellness guidance, expert insights, and personal stories shared on our platform.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+    siteName: "Vedicka",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Disclaimer | Vedicka – Content Responsibility & Guidance",
+    description:
+      "Review Vedicka's Disclaimer to understand the scope and intent of our content. Learn how to interpret wellness guidance, expert insights, and personal stories shared on our platform.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+  },
+};
+
 export default function Disclaimer() {
   return (
     <main className="py-12 min-h-screen px-4 sm:px-6 lg:px-12">
@@ -236,18 +274,31 @@ export default function Disclaimer() {
                   8. Contact Us
                 </h2>
               </div>
-              <div className="p-6">
+             <div className="p-6">
                 <p className="text-gray-600">
                   If you have any questions or concerns about these Terms and
                   Conditions, please contact us at:
                 </p>
-                <p className="mt-2 text-amber-600">
-                  Email: support@vedicka.com
+                <div className="text-gray-600 mt-2">
+                  Email:{" "}
+                  <a
+                    href="mailto:support@vedicka.com"
+                    className="text-amber-600 hover:text-amber-700 hover:underline"
+                  >
+                    support@vedicka.com
+                  </a>
                   <br />
-                  Address: Alkapuri, Vadodara, Gujarat, India 390007.
-                  <br />
-                  Contact: Available on vedicka.com
-                </p>
+                  Contact: Available on{" "}
+                  <Link
+                    href="/contact-us"
+                    className="text-amber-600 hover:text-amber-700 hover:underline"
+                  >
+                    vedicka.com
+                  </Link>
+                  <address className="not-italic text-gray-700">
+                    Address: Alkapuri, Vadodara, Gujarat, India 390007.
+                  </address>
+                </div>
               </div>
             </div>
           </div>

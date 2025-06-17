@@ -1,3 +1,42 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "Vedicka – Terms & Conditions for a Mindful Digital Experience",
+  description:
+    "Explore Vedicka’s Terms & Conditions to understand your rights, responsibilities, and the guidelines for using our wellness-focused website and digital services.",
+  openGraph: {
+    title: "Vedicka – Terms & Conditions for a Mindful Digital Experience",
+    description:
+      "Explore Vedicka’s Terms & Conditions to understand your rights, responsibilities, and the guidelines for using our wellness-focused website and digital services.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+    siteName: "Vedicka",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vedicka – Terms & Conditions for a Mindful Digital Experience",
+    description:
+      "Explore Vedicka’s Terms & Conditions to understand your rights, responsibilities, and the guidelines for using our wellness-focused website and digital services.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+  },
+};
+
+
 export default function TermsAndConditions() {
   return (
     <main className="py-12 min-h-screen px-4 sm:px-6 lg:px-12">
@@ -19,11 +58,10 @@ export default function TermsAndConditions() {
               </div>
               <div className="p-6">
                 <p className="text-gray-600">
-                  By accessing and using vedicka.com (hereinafter
-                  referred to as "the Site," "we," "us," or "our"), you agree to
-                  comply with and be bound by these Terms and Conditions. If you
-                  do not agree with any part of these terms, you must not use
-                  our Site.
+                  By accessing and using vedicka.com (hereinafter referred to as
+                  "the Site," "we," "us," or "our"), you agree to comply with
+                  and be bound by these Terms and Conditions. If you do not
+                  agree with any part of these terms, you must not use our Site.
                 </p>
               </div>
             </div>
@@ -41,11 +79,10 @@ export default function TermsAndConditions() {
                   </h3>
                   <ul className="list-disc list-inside text-gray-600 space-y-2">
                     <li>
-                      All content on vedicka.com, including but not
-                      limited to text, images, graphics, logos, and software, is
-                      the property of vedicka.com or its licensors and is
-                      protected by copyright and other intellectual property
-                      laws.
+                      All content on vedicka.com, including but not limited to
+                      text, images, graphics, logos, and software, is the
+                      property of vedicka.com or its licensors and is protected
+                      by copyright and other intellectual property laws.
                     </li>
                   </ul>
                   <h3 className="font-semibold text-gray-900 mt-4">
@@ -134,11 +171,10 @@ export default function TermsAndConditions() {
                   </h3>
                   <ul className="list-disc list-inside text-gray-600 space-y-2">
                     <li>
-                      The content on vedicka.com is provided for
-                      informational purposes only and should not be considered
-                      professional advice. We make no representations or
-                      warranties about the accuracy, completeness, or
-                      suitability of the content.
+                      The content on vedicka.com is provided for informational
+                      purposes only and should not be considered professional
+                      advice. We make no representations or warranties about the
+                      accuracy, completeness, or suitability of the content.
                     </li>
                   </ul>
                   <h3 className="font-semibold text-gray-900 mt-4">
@@ -175,11 +211,11 @@ export default function TermsAndConditions() {
                   <h3 className="font-semibold text-gray-900">Limitation :</h3>
                   <ul className="list-disc list-inside text-gray-600 space-y-2">
                     <li>
-                      To the fullest extent permitted by law, vedicka.com
-                      and its affiliates, officers, directors, employees, and
-                      agents shall not be liable for any direct, indirect,
-                      incidental, consequential, or punitive damages arising out
-                      of or related to your use of our Site.
+                      To the fullest extent permitted by law, vedicka.com and
+                      its affiliates, officers, directors, employees, and agents
+                      shall not be liable for any direct, indirect, incidental,
+                      consequential, or punitive damages arising out of or
+                      related to your use of our Site.
                     </li>
                   </ul>
                   <h3 className="font-semibold text-gray-900 mt-4">
@@ -187,10 +223,10 @@ export default function TermsAndConditions() {
                   </h3>
                   <ul className="list-disc list-inside text-gray-600 space-y-2">
                     <li>
-                      You agree to indemnify and hold vedicka.com
-                      harmless from any claims, damages, or expenses arising out
-                      of your use of our Site or your violation of these Terms
-                      and Conditions.
+                      You agree to indemnify and hold vedicka.com harmless from
+                      any claims, damages, or expenses arising out of your use
+                      of our Site or your violation of these Terms and
+                      Conditions.
                     </li>
                   </ul>
                 </div>
@@ -298,18 +334,32 @@ export default function TermsAndConditions() {
                   9. Contact Us
                 </h2>
               </div>
-              <div className="p-6">
+               <div className="p-6">
                 <p className="text-gray-600">
                   If you have any questions or concerns about these Terms and
                   Conditions, please contact us at:
                 </p>
-                <p className="mt-2 text-amber-600">
-                  Email: support@vedicka.com
+                <div className="text-gray-600 mt-2">
+                  Email:{" "}
+                  <a
+                    href="mailto:support@vedicka.com"
+                    className="text-amber-600 hover:text-amber-700 hover:underline"
+                  >
+                    support@vedicka.com
+                  </a>
                   <br />
-                  Address: Alkapuri, Vadodara, Gujarat, India 390007.
+                  <address className="not-italic mt-1 text-gray-700">
+                    Address: Alkapuri, Vadodara, Gujarat, India 390007.
+                  </address>
                   <br />
-                  Contact: Available on vedicka.com
-                </p>
+                  Contact: Available on{" "}
+                  <Link
+                    href="/contact-us"
+                    className="text-amber-600 hover:text-amber-700 hover:underline"
+                  >
+                    vedicka.com
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -322,8 +372,8 @@ export default function TermsAndConditions() {
               <div className="p-6">
                 <p className="text-gray-600">
                   These Terms and Conditions constitute the entire agreement
-                  between you and vedicka.com regarding your use of our
-                  Site, superseding any prior agreements.
+                  between you and vedicka.com regarding your use of our Site,
+                  superseding any prior agreements.
                 </p>
               </div>
             </div>

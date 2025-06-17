@@ -1,3 +1,41 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "Your Privacy Matters | Vedicka Privacy Policy",
+  description:
+    "Learn how Vedicka collects, uses, and protects your personal data. Read our Privacy Policy to understand your rights, privacy choices, and our commitment to safeguarding your digital well-being.",
+  openGraph: {
+    title: "Your Privacy Matters | Vedicka Privacy Policy",
+    description:
+      "Learn how Vedicka collects, uses, and protects your personal data. Read our Privacy Policy to understand your rights, privacy choices, and our commitment to safeguarding your digital well-being.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+    siteName: "Vedicka",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Your Privacy Matters | Vedicka Privacy Policy",
+    description:
+      "Learn how Vedicka collects, uses, and protects your personal data. Read our Privacy Policy to understand your rights, privacy choices, and our commitment to safeguarding your digital well-being.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+  },
+};
+
 export default function PrivacyPolicy() {
   return (
     <main className="py-12 min-h-screen px-4 sm:px-6 lg:px-12">
@@ -18,13 +56,13 @@ export default function PrivacyPolicy() {
               </div>
               <div className="p-6">
                 <p className="text-gray-600">
-                  Welcome to vedicka.com (hereinafter referred to as "the
-                  Site," "we," "us," or "our"). We are committed to protecting
-                  your privacy and ensuring the security of your personal
+                  Welcome to vedicka.com (hereinafter referred to as "the Site,"
+                  "we," "us," or "our"). We are committed to protecting your
+                  privacy and ensuring the security of your personal
                   information. This Privacy Policy outlines how we collect, use,
                   disclose, and safeguard your information when you visit our
-                  Site. By using vedicka.com, you agree to the terms of
-                  this Privacy Policy.
+                  Site. By using vedicka.com, you agree to the terms of this
+                  Privacy Policy.
                 </p>
               </div>
             </div>
@@ -347,16 +385,28 @@ export default function PrivacyPolicy() {
                   11. Contact Us
                 </h2>
               </div>
-              <div className="p-6">
+             <div className="p-6">
                 <p className="text-gray-600 ">
                   For any questions or concerns about this Privacy Policy,
                   please contact us:
                 </p>
-                <p className="mt-2 text-amber-600">
-                  Email: support@vedicka.com
+                <div className="text-gray-600 mt-2">
+                  Email:{" "}
+                  <a
+                    href="mailto:support@vedicka.com"
+                    className="text-amber-600 hover:text-amber-700 hover:underline"
+                  >
+                    support@vedicka.com
+                  </a>
                   <br />
-                  Contact: Available on vedicka.com
-                </p>
+                  Contact: Available on{" "}
+                  <Link
+                    href="/contact-us"
+                    className="text-amber-600 hover:text-amber-700 hover:underline"
+                  >
+                    vedicka.com
+                  </Link>
+                </div>
               </div>
             </div>
 

@@ -72,7 +72,7 @@ const NewsLetter = () => {
               <Star className="h-4 w-4 text-amber-600 mr-2" />
               <span className="text-sm font-medium">Cosmic Wisdom</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-amber-800 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Receive Celestial Guidance
             </h2>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
