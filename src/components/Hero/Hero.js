@@ -167,7 +167,7 @@ const Hero = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
-                href="/aboutUs"
+                href="/about-us"
                 className="px-8 py-3 border border-amber-600 text-amber-700 rounded-lg font-medium hover:bg-amber-100 transition-colors duration-300"
               >
                 Our Astrologers

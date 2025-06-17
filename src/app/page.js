@@ -10,12 +10,33 @@ import LatestBlogs from "@/components/LatestBlogs/LatestBlogs";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
 
 export default function Home() {
+  const homePageSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vedicka",
+    url: "https://vedicka.com",
+    logo: "https://vedicka.com/vedicka.png",
+    sameAs: [
+      "https://www.facebook.com/vedicka/",
+      "https://www.instagram.com/vedicka/",
+      "https://x.com/vedicka",
+    ],
+    description:
+      "Vedicka empowers individuals to reconnect with life through digital detox practices, wellness insights, and tools for mindful living and mental clarity.",
+  };
+
   return (
-    <div className="blob-container">
-      <Hero />
-      <TrendingBlogs />
-      <LatestBlogs />
-      <NewsLetter />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageSchema) }}
+      />
+      <div className="blob-container">
+        <Hero />
+        <TrendingBlogs />
+        <LatestBlogs />
+        <NewsLetter />
+      </div>
+    </>
   );
 }

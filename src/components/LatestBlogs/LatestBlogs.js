@@ -3,26 +3,22 @@ import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ajaxCall from "@/helpers/ajaxCall";
-import { Calendar, Clock, Tag, ChevronDown } from "lucide-react";
+import { Calendar, Clock, Tag } from "lucide-react";
 
 const LatestBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState(["All"]);
-  const [filteredBlogs, setFilteredBlogs] = useState([]);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await ajaxCall(
-          "/posts-latest/?site_domain=breatheoffline.com",
+          "/posts-latest/?site_domain=vedicka.com",
           { method: "GET" }
         );
         setBlogs(response.data.results);
       } catch (error) {
-        console.log("error", error);
+        console.error("Error fetching latest blogs:", error);
       } finally {
         setLoading(false);
       }
@@ -31,191 +27,195 @@ const LatestBlogs = () => {
     fetchBlogs();
   }, []);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await ajaxCall(
-          "/get-categories/?site=breatheoffline.com	",
-          {
-            method: "GET",
-          }
-        );
-        setCategories((prev) => [
-          "All",
-          ...response.data.results.map((category) => category.name),
-        ]);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
-    let filtered = blogs;
-
-    if (selectedCategory !== "All") {
-      filtered = filtered.filter(
-        (blog) => blog.category.name === selectedCategory
-      );
-    }
-
-    setFilteredBlogs(filtered);
-  }, [selectedCategory, blogs]);
-
   return (
-    <section className="py-20 bg-amber-50">
+    <section
+      aria-labelledby="latest-blogs-heading"
+      className="py-20 bg-gradient-to-r from-amber-50 to-amber-50"
+    >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Latest Insights
-          </h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-            Discover our latest astrological forecasts, birth chart analyses,
-            and Vedic remedies.
-          </p>
-        </div>
-        <div className="md:hidden w-full py-4">
-          <button
-            onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-            className="w-full flex justify-between items-center px-4 py-2 bg-gray-100 rounded-lg"
+        <header className="text-center mb-12">
+          <h1
+            id="latest-blogs-heading"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
           >
-            <span>Categories</span>
-            <ChevronDown
-              className={`h-5 w-5 transition-transform ${
-                isCategoryOpen ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-          {isCategoryOpen && (
-            <div className="mt-2 space-y-2">
-              {categories.map((category, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setSelectedCategory(category);
-                    setIsCategoryOpen(false);
-                  }}
-                  className={`inline-flex items-center justify-center px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-300 border border-amber-600  ${
-                    selectedCategory === category
-                      ? "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-lg shadow-amber-500/25"
-                      : "bg-white text-amber-600 hover:bg-amber-50"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-        {categories.length > 1 ? (
-          <div className="hidden md:flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category, index) => (
-              <button
-                key={category + index}
-                onClick={() => setSelectedCategory(category)}
-                className={`inline-flex items-center justify-center px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-300 border border-amber-600  ${
-                  selectedCategory === category
-                    ? "bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-lg shadow-amber-500/25"
-                    : "bg-white text-amber-600 hover:bg-amber-50"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center text-gray-600 mb-12">
-            No Categories Available.
-          </div>
-        )}
+            Latest Insights on Digital Wellness
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Discover our newest articles on digital wellness and mindful
+            technology use. Stay up-to-date with the latest trends and
+            perspectives.
+          </p>
+        </header>
+
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div
+            role="status"
+            aria-live="polite"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
             {[...Array(4)].map((_, index) => (
               <article
-                key={index}
-                className="overflow-hidden rounded-2xl shadow-lg h-full flex flex-col"
+                key={`loading-${index}`}
+                className="overflow-hidden rounded-2xl shadow-lg flex flex-col h-full bg-white"
+                aria-label="Blog post loading"
               >
-                <div className="relative h-64 bg-gray-200 animate-pulse"></div>
-                <div className="p-6 bg-white flex flex-col flex-grow">
-                  <div className="h-6 bg-gray-200 rounded animate-pulse mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded animate-pulse mb-4 w-2/3"></div>
-
+                <div
+                  className="aspect-[4/3] bg-gray-200 animate-pulse"
+                  aria-hidden="true"
+                ></div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <div
+                    className="h-6 bg-gray-200 rounded animate-pulse mb-4"
+                    aria-hidden="true"
+                  ></div>
+                  <div
+                    className="h-4 bg-gray-200 rounded animate-pulse mb-2"
+                    aria-hidden="true"
+                  ></div>
+                  <div
+                    className="h-4 bg-gray-200 rounded animate-pulse mb-2"
+                    aria-hidden="true"
+                  ></div>
+                  <div
+                    className="h-4 bg-gray-200 rounded animate-pulse mb-4 w-2/3"
+                    aria-hidden="true"
+                  ></div>
                   <div className="flex items-center gap-3 mb-4 mt-auto">
-                    <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
+                    <div
+                      className="w-10 h-10 rounded-full bg-gray-200 animate-pulse"
+                      aria-hidden="true"
+                    ></div>
                     <div className="flex-1">
-                      <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
-                      <div className="h-3 bg-gray-200 rounded animate-pulse w-1/2"></div>
+                      <div
+                        className="h-4 bg-gray-200 rounded animate-pulse mb-2"
+                        aria-hidden="true"
+                      ></div>
+                      <div
+                        className="h-3 bg-gray-200 rounded animate-pulse w-1/2"
+                        aria-hidden="true"
+                      ></div>
                     </div>
                   </div>
                   <div className="flex justify-between">
-                    <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                    <div
+                      className="h-4 w-24 bg-gray-200 rounded animate-pulse"
+                      aria-hidden="true"
+                    ></div>
+                    <div
+                      className="h-4 w-24 bg-gray-200 rounded animate-pulse"
+                      aria-hidden="true"
+                    ></div>
                   </div>
                 </div>
               </article>
             ))}
+            <span className="sr-only">Loading latest blog posts...</span>
           </div>
-        ) : filteredBlogs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredBlogs.map((blog, index) => (
-              <Link key={index} href={`/${blog.slug}`}>
-                <article className="group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 h-full flex flex-col">
-                  <div className="relative h-64 overflow-hidden">
+        ) : blogs.length > 0 ? (
+          <div
+            role="list"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {blogs.map((blog, index) => (
+              <article
+                key={blog.id || index}
+                role="listitem"
+                itemScope
+                itemType="https://schema.org/BlogPosting"
+                className="group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 flex flex-col h-full bg-white hover:shadow-xl"
+              >
+                <Link
+                  href={`/${blog.slug}`}
+                  aria-label={`Read more about ${blog.title}`}
+                  className="flex flex-col h-full"
+                  itemProp="url"
+                >
+                  <div className="aspect-[4/3] overflow-hidden relative">
                     <img
                       src={blog.featured_image}
-                      alt={blog.image_alt}
+                      alt={blog.image_alt || blog.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      itemProp="image"
+                      loading={index < 2 ? "eager" : "lazy"}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 text-amber-600 text-sm font-medium">
-                        <Tag className="h-3 w-3" />
+                      <span
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 text-amber-600 text-sm font-medium"
+                        itemProp="articleSection"
+                      >
+                        <Tag className="h-3 w-3" aria-hidden="true" />
                         {blog.category.name}
                       </span>
                     </div>
                   </div>
-                  <div className="relative p-6 bg-white flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
-                      {blog.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 flex-grow line-clamp-3">
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors line-clamp-2">
+                      <span itemProp="headline">{blog.title}</span>
+                    </h2>
+                    <p
+                      className="text-gray-600 mb-4 flex-grow line-clamp-3"
+                      itemProp="description"
+                    >
                       {blog.excerpt}
                     </p>
-                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                    <div
+                      className="flex items-center gap-3 mb-3"
+                      itemProp="author"
+                      itemScope
+                      itemType="https://schema.org/Person"
+                    >
                       <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-amber-100 flex items-center justify-center bg-amber-100 text-amber-600 font-semibold">
                         {blog.author.full_name.charAt(0)}
                       </div>
                       <div>
-                        <p className="text-xs sm:text-sm font-medium text-gray-900">
+                        <p
+                          className="text-sm font-medium text-gray-900"
+                          itemProp="name"
+                        >
                           {blog.author.full_name}
                         </p>
-                        <p className="text-xs sm:text-sm text-gray-500">
+                        <time
+                          className="text-xs text-gray-500"
+                          dateTime={moment(blog.published_at).format()}
+                          itemProp="datePublished"
+                        >
                           {moment(blog.published_at).format("ll")}
-                        </p>
+                        </time>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-3 items-center justify-between text-xs sm:text-sm text-gray-500">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4 text-amber-500" />
+                    <div className="flex flex-wrap gap-3 items-center justify-between text-xs text-gray-500">
+                      <time
+                        className="flex items-center gap-1"
+                        dateTime={moment(blog.published_at).format()}
+                        itemProp="datePublished"
+                      >
+                        <Calendar
+                          className="h-4 w-4 text-amber-500"
+                          aria-hidden="true"
+                        />
                         {moment(blog.published_at).format("ll")}
-                      </span>
+                      </time>
                       <span className="flex items-center gap-1">
-                        <Clock className="h-4 w-4 text-amber-500" />
+                        <Clock
+                          className="h-4 w-4 text-amber-500"
+                          aria-hidden="true"
+                        />
                         {moment(blog.published_at).startOf("hour").fromNow()}
                       </span>
                     </div>
                   </div>
-                </article>
-              </Link>
+                </Link>
+              </article>
             ))}
           </div>
         ) : (
-          <div className="text-center text-gray-600">
-            No Blogs Available For The {selectedCategory}.
+          <div
+            role="status"
+            className="text-center text-gray-600"
+            aria-label="No blog posts available"
+          >
+            No Latest Blogs Available.
           </div>
         )}
       </div>

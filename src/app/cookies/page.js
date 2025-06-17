@@ -1,3 +1,41 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "How Vedicka Uses Cookies | Cookie Policy & User Privacy",
+  description:
+    "Understand how Vedicka uses cookies to enhance your browsing experience, analyze website traffic, and deliver relevant content. Learn about your privacy choices and cookie settings.",
+  openGraph: {
+    title: "How Vedicka Uses Cookies | Cookie Policy & User Privacy",
+    description:
+      "Understand how Vedicka uses cookies to enhance your browsing experience, analyze website traffic, and deliver relevant content. Learn about your privacy choices and cookie settings.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+    siteName: "Vedicka",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "How Vedicka Uses Cookies | Cookie Policy & User Privacy",
+    description:
+      "Understand how Vedicka uses cookies to enhance your browsing experience, analyze website traffic, and deliver relevant content. Learn about your privacy choices and cookie settings.",
+    images: [
+      {
+        url: "https://vedicka.com/vedicka.png",
+        width: 800,
+        height: 600,
+        alt: "Vedicka Logo",
+      },
+    ],
+  },
+};
+
 export default function CookiesPolicy() {
   return (
     <main className="py-12 min-h-screen px-4 sm:px-6 lg:px-12">
@@ -18,11 +56,11 @@ export default function CookiesPolicy() {
               </div>
               <div className="p-6">
                 <p className="text-gray-600">
-                  vedicka.com (hereinafter referred to as "the Site,"
-                  "we," "us," or "our") uses cookies and other similar
-                  technologies to enhance your browsing experience. This Cookie
-                  Policy explains what cookies are, how we use them, and your
-                  choices regarding cookies.
+                  vedicka.com (hereinafter referred to as "the Site," "we,"
+                  "us," or "our") uses cookies and other similar technologies to
+                  enhance your browsing experience. This Cookie Policy explains
+                  what cookies are, how we use them, and your choices regarding
+                  cookies.
                 </p>
               </div>
             </div>
@@ -212,18 +250,26 @@ export default function CookiesPolicy() {
                   8. Contact Us
                 </h2>
               </div>
-              <div className="p-6">
-                <p className="text-gray-600">
-                  If you have any questions or concerns about these Terms and
-                  Conditions, please contact us at:
-                </p>
-                <p className="mt-2 text-amber-600">
-                  Email: support@vedicka.com
-                  <br />
+              <div className="text-gray-600 mt-2">
+                Email:{" "}
+                <a
+                  href="mailto:support@vedicka.com"
+                  className="text-amber-600 hover:text-amber-700 hover:underline"
+                >
+                  support@vedicka.com
+                </a>
+                <br />
+                Contact: Available on{" "}
+                <Link
+                  href="/contact-us"
+                  className="text-amber-600 hover:text-amber-700 hover:underline"
+                >
+                  vedicka.com
+                </Link>
+                <address className="not-italic text-gray-700">
                   Address: Alkapuri, Vadodara, Gujarat, India 390007.
-                  <br />
-                  Contact: Available on vedicka.com
-                </p>
+                </address>
+                <br />
               </div>
             </div>
 

@@ -12,7 +12,9 @@ import {
   Sparkles,
 } from "lucide-react";
 import moment from "moment";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import ajaxCall from "@/helpers/ajaxCall";
 import BlogTicker from "../RelatedArticles/BlogTicker";
 import RelatedArticles from "../RelatedArticles/RelatedArticles";
@@ -24,6 +26,7 @@ const MobileBlogDetails = ({ slug }) => {
   const [showTicker, setShowTicker] = useState(false);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
   const category = blog?.category?.name;
+  const router = useRouter();
 
   useEffect(() => {
     if (!slug) return;
@@ -33,6 +36,8 @@ const MobileBlogDetails = ({ slug }) => {
         setBlog(response.data);
       } catch (error) {
         console.log("error", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -44,7 +49,7 @@ const MobileBlogDetails = ({ slug }) => {
       if (!category) return;
       try {
         const response = await ajaxCall(
-          `/posts-category/?site_domain=breatheoffline.com&category_name=${category}`,
+          `/posts-category/?site_domain=vedicka.com&category_name=${category}`,
           { method: "GET" }
         );
         setRelatedBlogs(response.data.results);
@@ -60,11 +65,7 @@ const MobileBlogDetails = ({ slug }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowTicker(true);
-      } else {
-        setShowTicker(false);
-      }
+      setShowTicker(window.scrollY > 300);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -72,7 +73,7 @@ const MobileBlogDetails = ({ slug }) => {
   }, []);
 
   const handleGoBack = () => {
-    window.history.back();
+    router.back();
   };
 
   useEffect(() => {
@@ -103,20 +104,20 @@ const MobileBlogDetails = ({ slug }) => {
             >
               <div className="flex flex-wrap items-center gap-3 text-sm">
                 <span className="px-3 py-1 rounded-full bg-amber-600 text-white font-medium">
-                  {blog.category?.name}
+                  {blog?.category?.name}
                 </span>
                 <div className="flex items-center gap-1 text-gray-500">
-                  <Calendar className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" aria-hidden="true" />
                   <span>{moment(blog?.published_at)?.format("ll")}</span>
                 </div>
                 <div className="flex items-center gap-1 text-gray-500">
-                  <Clock className="h-4 w-4" />
+                  <Clock className="h-4 w-4" aria-hidden="true" />
                   <span>
                     {moment(blog?.published_at)?.startOf("hour")?.fromNow()}
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-gray-500">
-                  <Eye className="h-4 w-4" />
+                  <Eye className="h-4 w-4" aria-hidden="true" />
                   <span>{blog.view_count} views</span>
                 </div>
               </div>
@@ -126,9 +127,15 @@ const MobileBlogDetails = ({ slug }) => {
               <p className="text-xl text-gray-600">{blog.excerpt}</p>
               <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-600 to-amber-600 flex items-center justify-center text-white font-semibold">
-                    {blog.author?.full_name?.charAt(0)}
-                  </div>
+                  {blog.author?.full_name && (
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-600 to-amber-600 flex items-center justify-center text-white font-semibold">
+                      {blog.author.full_name.includes(" ")
+                        ? `${blog.author.full_name.split(" ")[0][0]}${
+                            blog.author.full_name.split(" ")[1][0]
+                          }`
+                        : blog.author.full_name.substring(0, 2)}
+                    </div>
+                  )}
                   <div>
                     <h3 className="text-gray-900 font-medium">
                       {blog.author?.full_name}
@@ -149,7 +156,7 @@ const MobileBlogDetails = ({ slug }) => {
               >
                 <img
                   src={blog.featured_image}
-                  alt={blog.image_alt}
+                  alt={blog.image_alt || blog.title}
                   className="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
                 />
               </motion.div>
@@ -174,7 +181,7 @@ const MobileBlogDetails = ({ slug }) => {
                   onClick={handleGoBack}
                   className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-600 text-white text-sm font-medium hover:bg-amber-700 transition-colors"
                 >
-                  <ArrowLeft className="h-4 w-4" />
+                  <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                   Back to Blogs
                 </button>
               </motion.div>
@@ -185,43 +192,49 @@ const MobileBlogDetails = ({ slug }) => {
                 className="bg-gradient-to-br from-amber-50 to-amber-50 rounded-xl p-6 shadow-md"
               >
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <Sparkles className="h-4 w-4 text-amber-600 mr-2" />
-                  Share This Article
+                  <Sparkles
+                    className="h-4 w-4 text-amber-600 mr-2"
+                    aria-hidden="true"
+                  />
+                  Share this article
                 </h3>
                 <div className="grid grid-cols-3 gap-3">
-                  <button
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://www.facebook.com/vedicka/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex flex-col items-center justify-center p-3 rounded-lg bg-[#1877F2]/10 text-[#1877F2] hover:bg-[#1877F2]/20 transition-colors"
-                    onClick={() =>
-                      window.open(
-                        "https://www.facebook.com/people/Vedicka-Travel/61571280080816/",
-                        "_blank"
-                      )
-                    }
+                    aria-label="Share on Facebook"
                   >
-                    <Facebook className="h-6 w-6 mb-1" />
+                    <Facebook className="h-6 w-6 mb-1" aria-hidden="true" />
                     <span className="text-xs">Facebook</span>
-                  </button>
-                  <button
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://x.com/vedicka/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex flex-col items-center justify-center p-3 rounded-lg bg-[#1DA1F2]/10 text-[#1DA1F2] hover:bg-[#1DA1F2]/20 transition-colors"
-                    onClick={() =>
-                      window.open("https://x.com/breatheoffline", "_blank")
-                    }
+                    aria-label="Share on Twitter"
                   >
-                    <Twitter className="h-6 w-6 mb-1" />
+                    <Twitter className="h-6 w-6 mb-1" aria-hidden="true" />
                     <span className="text-xs">Twitter</span>
-                  </button>
-                  <button
-                    className="flex flex-col items-center justify-center p-3 rounded-lg bg-[#E4405F]/10 text-[#E4405F] hover:bg-[#E4405F]/20 transition-colors"
-                    onClick={() =>
-                      window.open(
-                        "https://www.instagram.com/breatheoffline/",
-                        "_blank"
-                      )
-                    }
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://www.instagram.com/vedicka/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-3 rounded-lg bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2]/20 transition-colors"
+                    aria-label="Visit us on Instagram"
                   >
-                    <Instagram className="h-6 w-6 mb-1" />
+                    <Instagram className="h-6 w-6 mb-1" aria-hidden="true" />
                     <span className="text-xs">Instagram</span>
-                  </button>
+                  </motion.a>
                 </div>
               </motion.div>
               {blog.tags?.length > 0 && (
@@ -232,18 +245,24 @@ const MobileBlogDetails = ({ slug }) => {
                   className="bg-gradient-to-br from-amber-50 to-amber-50 rounded-xl p-6 shadow-md"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <Tag className="h-4 w-4 text-amber-600 mr-2" />
+                    <Tag
+                      className="h-4 w-4 text-amber-600 mr-2"
+                      aria-hidden="true"
+                    />
                     Tags
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {blog.tags.map((tag, index) => (
-                      <span
+                      <Link
                         key={index}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/80 text-amber-600 text-sm font-medium hover:shadow-md transition-shadow"
+                        href={`/tag/${tag.slug}`}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 text-sm font-medium hover:shadow-md transition-shadow"
+                        aria-label={`View all posts tagged ${tag.name}`}
+                        itemProp="keywords"
                       >
-                        <Tag className="h-3 w-3" />
+                        <Tag className="h-3 w-3" aria-hidden="true" />{" "}
                         {tag.name}
-                      </span>
+                      </Link>
                     ))}
                   </div>
                 </motion.div>
@@ -256,11 +275,15 @@ const MobileBlogDetails = ({ slug }) => {
                   className="bg-gradient-to-br from-amber-50 to-amber-50 rounded-xl p-6 shadow-md"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    About The Author
+                    About the Author
                   </h3>
                   <div className="flex flex-col items-center text-center">
                     <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-600 to-amber-600 flex items-center justify-center text-white text-2xl font-semibold mb-3">
-                      {blog.author.full_name.charAt(0)}
+                      {blog.author.full_name.includes(" ")
+                        ? `${blog.author.full_name.split(" ")[0][0]}${
+                            blog.author.full_name.split(" ")[1][0]
+                          }`
+                        : blog.author.full_name.substring(0, 2)}
                     </div>
                     <h4 className="text-xl font-semibold text-gray-900">
                       {blog.author.full_name}
@@ -286,7 +309,7 @@ const MobileBlogDetails = ({ slug }) => {
             onClick={handleGoBack}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-600 text-white text-sm font-medium hover:bg-amber-700 transition-colors shadow-lg"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to Blogs
           </motion.button>
         </div>
