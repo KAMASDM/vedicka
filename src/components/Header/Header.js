@@ -10,6 +10,7 @@ const navigation = [
   { name: "Categories", href: "/categories" },
   { name: "AboutUs", href: "/about-us" },
   { name: "ContactUs", href: "/contact-us" },
+  { name: "Write for Us", href: "/write-for-us" },
 ];
 
 const Header = () => {
@@ -22,11 +23,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <img
-                src="/vedicka.png"
-                alt="Vedicka"
-                className="h-8 w-auto"
-              />
+              <img src="/vedicka.png" alt="Vedicka" className="h-8 w-auto" />
               <span className="text-2xl font-bold text-amber-700 transition-colors">
                 Vedicka
               </span>
