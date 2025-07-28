@@ -36,7 +36,6 @@ export const metadata = {
   },
 };
 
-
 export default function TermsAndConditions() {
   return (
     <main className="py-12 min-h-screen px-4 sm:px-6 lg:px-12">
@@ -334,7 +333,7 @@ export default function TermsAndConditions() {
                   9. Contact Us
                 </h2>
               </div>
-               <div className="p-6">
+              <div className="p-6">
                 <p className="text-gray-600">
                   If you have any questions or concerns about these Terms and
                   Conditions, please contact us at:
@@ -342,10 +341,10 @@ export default function TermsAndConditions() {
                 <div className="text-gray-600 mt-2">
                   Email:{" "}
                   <a
-                    href="mailto:support@vedicka.com"
+                    href="mailto:vedicka@gmail.com"
                     className="text-amber-600 hover:text-amber-700 hover:underline"
                   >
-                    support@vedicka.com
+                    vedicka@gmail.com
                   </a>
                   <br />
                   <address className="not-italic mt-1 text-gray-700">

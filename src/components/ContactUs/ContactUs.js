@@ -229,10 +229,10 @@ const ContactUs = () => {
                         Email our support team
                       </p>
                       <a
-                        href="mailto:support@vedicka.com"
+                        href="mailto:vedicka@gmail.com"
                         className="text-gray-700 hover:underline"
                       >
-                        support@vedicka.com
+                        vedicka@gmail.com
                       </a>
                     </div>
                   </div>

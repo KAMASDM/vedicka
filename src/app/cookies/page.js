@@ -253,10 +253,10 @@ export default function CookiesPolicy() {
               <div className="text-gray-600 mt-2">
                 Email:{" "}
                 <a
-                  href="mailto:support@vedicka.com"
+                  href="mailto:vedicka@gmail.com"
                   className="text-amber-600 hover:text-amber-700 hover:underline"
                 >
-                  support@vedicka.com
+                  vedicka@gmail.com
                 </a>
                 <br />
                 Contact: Available on{" "}

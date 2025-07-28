@@ -56,9 +56,9 @@ export default function Disclaimer() {
               </div>
               <div className="p-6">
                 <p className="text-gray-600">
-                  The information provided on vedicka.com (hereinafter
-                  referred to as "the Site," "we," "us," or "our") is for
-                  general informational and educational purposes only. It is not
+                  The information provided on vedicka.com (hereinafter referred
+                  to as "the Site," "we," "us," or "our") is for general
+                  informational and educational purposes only. It is not
                   intended as a substitute for professional advice, including
                   but not limited to medical, psychological, or technological
                   advice.
@@ -182,11 +182,11 @@ export default function Disclaimer() {
                   </h3>
                   <ul className="list-disc list-inside text-gray-600 space-y-2">
                     <li>
-                      To the fullest extent permitted by law, vedicka.com
-                      and its affiliates, officers, directors, employees, and
-                      agents shall not be liable for any direct, indirect,
-                      incidental, consequential, or punitive damages arising out
-                      of or related to your use of this Site.
+                      To the fullest extent permitted by law, vedicka.com and
+                      its affiliates, officers, directors, employees, and agents
+                      shall not be liable for any direct, indirect, incidental,
+                      consequential, or punitive damages arising out of or
+                      related to your use of this Site.
                     </li>
                   </ul>
                 </div>
@@ -274,7 +274,7 @@ export default function Disclaimer() {
                   8. Contact Us
                 </h2>
               </div>
-             <div className="p-6">
+              <div className="p-6">
                 <p className="text-gray-600">
                   If you have any questions or concerns about these Terms and
                   Conditions, please contact us at:
@@ -282,10 +282,10 @@ export default function Disclaimer() {
                 <div className="text-gray-600 mt-2">
                   Email:{" "}
                   <a
-                    href="mailto:support@vedicka.com"
+                    href="mailto:vedicka@gmail.com"
                     className="text-amber-600 hover:text-amber-700 hover:underline"
                   >
-                    support@vedicka.com
+                    vedicka@gmail.com
                   </a>
                   <br />
                   Contact: Available on{" "}
