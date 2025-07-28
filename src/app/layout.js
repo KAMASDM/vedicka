@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
@@ -48,6 +49,39 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7W690RFNT3"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+              gtag('config', 'G-7W690RFNT3');
+            `,
+          }}
+        ></Script>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2283636579212292"
+          crossorigin="anonymous"
+        ></Script>
+        <meta
+          name="google-site-verification"
+          content="0rIZNvRLsBB4bDR0dwv6vOF7vvCfgwVTpgjuxqSZZeI"
+        />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-2283636579212292"
+        ></meta>
+      </head>
       <body>
         <Header />
         {children}
